@@ -4,7 +4,7 @@ export default function Education() {
       level: "College",
       school: "Consolatrix College of Toledo City, Inc.",
       program: "Bachelor of Science in Information Technology",
-      year: "2025 - 2026 (expected)",
+      year: "2025 - 2026",
     },
     {
       level: "Senior High School",
