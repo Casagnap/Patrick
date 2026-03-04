@@ -1,6 +1,11 @@
-import { Mail, Linkedin, Github, Phone, Send } from "lucide-react"
+"use client"
+
+import { Mail, Linkedin, Github, Phone, Send, FileText, X } from "lucide-react"
+import { useState } from "react"
 
 export default function Contact() {
+  const [showResume, setShowResume] = useState(false)
+
   const contactInfo = [
     {
       icon: Mail,
@@ -29,11 +34,33 @@ export default function Contact() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5">
-      <section className="section-container">
-        <h1 className="section-title">Get In Touch</h1>
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5 px-6 py-24">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
 
-        <div className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* LEFT COLUMN */}
+        <div className="space-y-8">
+          <div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text leading-tight">
+              Get In <br /> Touch
+            </h1>
+            <p className="text-muted-foreground max-w-md leading-relaxed">
+              I'm always open to discussing new opportunities, collaborations,
+              or just talking about technology and development.
+            </p>
+          </div>
+
+          <button
+            onClick={() => setShowResume(true)}
+            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold bg-primary text-primary-foreground rounded-xl shadow-md hover:opacity-90 transition"
+          >
+            <FileText size={20} />
+            View Resume
+          </button>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="space-y-6">
+
           {contactInfo.map((contact, index) => {
             const Icon = contact.icon
             return (
@@ -42,31 +69,66 @@ export default function Contact() {
                 href={contact.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-elevated flex flex-col items-start group"
+                className="flex items-center justify-between p-6 rounded-xl border border-primary/20 bg-background/50 backdrop-blur-md hover:shadow-lg hover:border-primary/40 transition"
               >
-                <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg mb-4 group-hover:from-primary/30 group-hover:to-accent/30 transition-all">
-                  <Icon className="text-accent group-hover:text-primary transition-colors" size={28} />
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg">
+                    <Icon className="text-accent" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{contact.label}</h3>
+                    <p className="text-muted-foreground text-sm">
+                      {contact.value}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-bold text-foreground mb-2">{contact.label}</h3>
-                <p className="text-muted-foreground group-hover:text-accent transition-colors">{contact.value}</p>
               </a>
             )
           })}
-        </div>
 
-        <div className="max-w-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 border border-primary/30 rounded-xl p-8 md:p-12 backdrop-blur-sm">
-          <div className="flex items-start gap-3 mb-4">
-            <Send className="text-accent mt-1" size={24} />
-            <h2 className="text-3xl font-bold gradient-text">Let's Connect</h2>
+          {/* Connect Box */}
+          <div className="mt-10 p-8 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 border border-primary/20 shadow-lg">
+            <div className="flex items-center gap-3 mb-4">
+              <Send className="text-accent" size={22} />
+              <h2 className="text-xl font-bold">Let's Connect</h2>
+            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Whether you have a project idea, job opportunity,
+              or just want to network, feel free to reach out.
+              I usually respond within 24–48 hours.
+            </p>
           </div>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            I'm always interested in hearing about new opportunities and connecting with fellow professionals in the IT
-            industry. Whether you have a project proposal, job opportunity, or just want to discuss technology, feel
-            free to reach out. I look forward to connecting with you!
-          </p>
-          <p className="text-muted-foreground/70 text-sm italic">Allow 24-48 hours for response</p>
+
         </div>
-      </section>
+      </div>
+
+      {/* MODAL */}
+      {showResume && (
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+    onClick={() => setShowResume(false)}
+  >
+    <div
+      className="relative w-full max-w-4xl max-h-[90vh] overflow-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close Button */}
+      <button
+        onClick={() => setShowResume(false)}
+        className="absolute top-4 right-4 bg-white/80 backdrop-blur px-3 py-2 rounded-lg shadow-md hover:bg-white z-10"
+      >
+        <X size={22} />
+      </button>
+
+      {/* Resume Image */}
+      <img
+        src="/resume.jpg"
+        alt="Resume"
+        className="w-full h-auto rounded-xl shadow-2xl"
+      />
+    </div>
+  </div>
+)}
     </div>
   )
 }

@@ -1,11 +1,18 @@
+"use client"
+
+import { useState } from "react"
+import { X } from "lucide-react"
+
 export default function Experience() {
+  const [showOJTPhotos, setShowOJTPhotos] = useState(false)
+
   const experience = {
-    company: "Tech Solutions Inc.",
+    company: "Municipal LGU of Pinamungajan",
     position: "IT Intern",
     duration: "June 2023 - August 2023",
-    location: "Metro City",
+    location: "Pinamungajan, Cebu",
     description:
-      "My OJT experience at Tech Solutions Inc. provided valuable exposure to real-world IT operations and professional workplace practices. I worked alongside experienced IT professionals and contributed to various projects that enhanced my technical and soft skills.",
+      "I completed my On-the-Job Training (OJT) at the Municipal Local Government Unit (LGU) of Pinamungajan, gaining hands-on experience in IT support, system management, and local government operations. I contributed to daily IT tasks, learned to manage office systems, and collaborated with staff to improve workflows.",
     responsibilities: [
       "Assisted in computer troubleshooting and maintenance",
       "Installed and configured software applications",
@@ -16,12 +23,15 @@ export default function Experience() {
     ],
     toolsUsed: ["Windows OS", "Google Workspace", "LAN Tools", "Active Directory", "Network Monitoring Tools"],
     reflection:
-      "My OJT experience allowed me to apply my academic knowledge in a real work environment. I learned the importance of teamwork, communication, and professionalism. The experience enhanced my technical skills, particularly in troubleshooting and system maintenance, and helped me gain confidence in dealing with real clients and workplace challenges.",
+      "This OJT experience allowed me to apply academic knowledge in a real-world work environment. I learned teamwork, communication, and professionalism, enhanced my technical skills in troubleshooting and system maintenance, and gained confidence in supporting end-users and workplace tasks.",
   }
+
+  // Add OJT photos here
+  const ojtPhotos = ["/ojt1.jpg", "/ojt2.jpg", "/ojt3.jpg", "/ojt4.jpg", "/ojt5.jpg", "/ojt6.jpg", "/ojt7.jpg", "/ojt8.jpg", "/ojt9.jpg",]
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="section-container max-w-3xl">
+      <section className="section-container max-w-3xl mx-auto">
         <h1 className="section-title">OJT / Internship Experience</h1>
 
         <div className="border-l-4 border-primary/40 pl-6 mb-12">
@@ -33,7 +43,15 @@ export default function Experience() {
             </p>
           </div>
 
-          <p className="text-foreground/70 leading-relaxed mb-8">{experience.description}</p>
+          <p className="text-foreground/70 leading-relaxed mb-4">{experience.description}</p>
+
+          {/* OJT Photos Button */}
+          <button
+            onClick={() => setShowOJTPhotos(true)}
+            className="mb-8 inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl shadow hover:opacity-90 transition"
+          >
+            View OJT Photos
+          </button>
 
           <div className="mb-8">
             <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-widest">
@@ -63,11 +81,44 @@ export default function Experience() {
           </div>
         </div>
 
-        <div className="border-l-4 border-primary/40 pl-6">
+        <div className="border-l-4 border-primary/40 pl-6 mb-12">
           <h2 className="text-lg font-medium text-foreground mb-4">OJT Reflection</h2>
           <p className="text-foreground/70 leading-relaxed">{experience.reflection}</p>
         </div>
       </section>
+
+      {/* OJT Photos Modal */}
+      {showOJTPhotos && (
+        <div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6"
+          onClick={() => setShowOJTPhotos(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowOJTPhotos(false)}
+              className="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur px-3 py-2 rounded-lg shadow hover:bg-white"
+            >
+              <X size={22} />
+            </button>
+
+            {/* OJT Photos Gallery */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {ojtPhotos.map((photo, idx) => (
+                <img
+                  key={idx}
+                  src={photo}
+                  alt={`OJT Photo ${idx + 1}`}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
