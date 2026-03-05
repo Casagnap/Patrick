@@ -10,14 +10,14 @@ export default function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: "patrick@gmail.com",
-      href: "mailto:patrick@gmail.com",
+      value: "patricklesterc@gmail.com",
+      href: "mailto:patricklesterc@gmail.com",
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+63 (123) 456-7890",
-      href: "tel:+63123456789",
+      value: "+63 956 5069 652",
+      href: "tel:+639565069652",
     },
     {
       icon: Linkedin,
@@ -28,8 +28,8 @@ export default function Contact() {
     {
       icon: Github,
       label: "GitHub",
-      value: "github.com/patricklester",
-      href: "https://github.com/patricklester",
+      value: "github.com/Casagnap",
+      href: "https://github.com/Casagnap",
     },
   ]
 
